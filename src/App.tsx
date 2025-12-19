@@ -1,20 +1,22 @@
 import { useContext } from "react";
-import TodoInput from "./components/TodoInput";
-import TodoList from "./components/TodoList";
-import FilterButtons from "./components/FilterButtons";
-import ThemeToggle from "./components/ThemeToggle";
+import TodoInput from "./components/TodoInput/TodoInput";
+import TodoList from "./components/TodoList/TodoList";
+import FilterButtons from "./components/FilterButtons/FilterButtons";
+import ThemeToggle from "./components/ThemeToggle/ThemeToggle";
 import { ThemeContext } from "./contexts/ThemeContext";
+import "./styles/app.css";
+
 
 export default function App() {
   const { theme } = useContext(ThemeContext);
 
   return (
     <div
-      className={`container mt-5 ${
-        theme === "dark" ? "bg-dark text-light" : ""
+      className={`app-container ${
+        theme === "dark" ? "app-dark" : "app-light"
       }`}
     >
-      <h2 className="mb-3">Todo App (Context + useState)</h2>
+      <h2 >Todo App (Context + useState)</h2>
       <ThemeToggle />
       <TodoInput />
       <FilterButtons />

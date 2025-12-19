@@ -1,0 +1,14 @@
+.filters {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.filters button {
+  padding: 6px 12px;
+}
+
+.filters .active {
+  background-color: #6c757d;
+  color: white;
+}

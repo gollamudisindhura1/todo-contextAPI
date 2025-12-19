@@ -1,18 +1,14 @@
 import { useContext } from "react";
-import { TodoContext, type Todo } from "../contexts/TodoContext";
+import { TodoContext, type Todo } from "../../contexts/TodoContext";
+import "./TodoItem.css";
 
 export default function TodoItem({ todo }: { todo: Todo }) {
   const { toggleTodo, deleteTodo } = useContext(TodoContext);
 
   return (
-    <li className="list-group-item d-flex justify-content-between">
+    <div className="todo-item">
       <span
-        onClick={() => toggleTodo(todo.id)}
-        style={{
-          textDecoration: todo.completed ? "line-through" : "none",
-          cursor: "pointer",
-        }}
-      >
+        onClick={() => toggleTodo(todo.id)}>
         {todo.text}
       </span>
       <button
@@ -21,6 +17,6 @@ export default function TodoItem({ todo }: { todo: Todo }) {
       >
         X
       </button>
-    </li>
+    </div>
   );
 }
