@@ -1,14 +1,24 @@
-//import { useState } from 'react'
-import './App.css'
+import { useContext } from "react";
+import TodoInput from "./components/TodoInput";
+import TodoList from "./components/TodoList";
+import FilterButtons from "./components/FilterButtons";
+import ThemeToggle from "./components/ThemeToggle";
+import { ThemeContext } from "./contexts/ThemeContext";
 
-function App() {
-  //const [count, setCount] = useState(0)
+export default function App() {
+  const { theme } = useContext(ThemeContext);
 
   return (
-    <>
-      <h1>Todo App (Context API)</h1>
-    </>
-  )
+    <div
+      className={`container mt-5 ${
+        theme === "dark" ? "bg-dark text-light" : ""
+      }`}
+    >
+      <h2 className="mb-3">Todo App (Context + useState)</h2>
+      <ThemeToggle />
+      <TodoInput />
+      <FilterButtons />
+      <TodoList />
+    </div>
+  );
 }
-
-export default App

@@ -7,7 +7,8 @@ interface ThemeContextType {
     toggleTheme: () => void
 }
 
-const ThemeContext = createContext<ThemeContextType>({
+// eslint-disable-next-line react-refresh/only-export-components
+export const ThemeContext = createContext<ThemeContextType>({
     theme: "light",
     toggleTheme: () =>{}
 })
