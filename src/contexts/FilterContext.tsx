@@ -8,7 +8,9 @@ interface FilterContextType {
     setFilter: (filter: Filter) => void
 }
 
-const FIlterContext = createContext<FilterContextType>({
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const FilterContext = createContext<FilterContextType>({
     filter : "all",
     setFilter: () => {}
 })
@@ -20,8 +22,8 @@ export function FilterProvider({children}: {children: ReactNode}){
     const [filter, setFilter] = useState<Filter>("all")
 
     return (
-        <FIlterContext.Provider value = {{filter, setFilter}}>
+        <FilterContext.Provider value = {{filter, setFilter}}>
             {children}
-        </FIlterContext.Provider>
+        </FilterContext.Provider>
     )
 }
