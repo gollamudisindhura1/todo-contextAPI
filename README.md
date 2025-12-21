@@ -1,73 +1,57 @@
-# React + TypeScript + Vite
+# Lab 3 – Todo Application using React Context API
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+In this lab, I built a functional Todo application using React Context API instead of prop drilling or external state management libraries. The goal was to understand how global state can be shared across components in a clean and scalable way. The application uses multiple independent contexts to manage different concerns:
+- Todos
+- Visibility filters
+- Theme (light/dark mode)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Learning Objectives
+### Through this lab, I practiced:
+- Creating and using multiple React contexts
+- Sharing state and functions globally using Context Providers
+- Managing complex state using useState
+- Consuming context values with useContext
+- Implementing filtering logic across contexts
+- Persisting state using localStorage
 
-## React Compiler
+## Todo Context
+The TodoContext manages the core todo data.
+Each todo has:
+1. id: unique identifier
+2. text: todo description
+3. completed: boolean status
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Todos are added as active by default (completed: false).
+A todo becomes completed when the user clicks on the todo text, which toggles the completed value.
 
-## Expanding the ESLint configuration
+## Filter Context
+The FilterContext controls which todos are visible.
+This is a TypeScript union type, which restricts the filter state to only valid values.
+It prevents bugs by ensuring invalid filter values cannot be set.
+Filter behavior:
+1. all: shows all todos
+2. active: shows todos where completed === false
+3. completed: shows todos where completed === true
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Local Storage
+1. Todos are saved to localStorage
+2. Theme preference is also persisted
+3. On page refresh, the app rehydrates state from localStorage
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Completed State
+The completed property is essential because it enables:
+1. Line-through styling for finished todos
+2. Filtering logic (active vs completed)
+3. Clearing completed todos
+Users do not select active or completed when adding a todo.
+Instead, todos are marked complete after the task is done.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Challenges Faced
+1. Understanding how completed works without explicit user input
+2. Applying theme changes to the entire page instead of just a card
+3. Organizing multiple contexts without confusion
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Conclusion
+This lab helped me understand how React Context API can replace prop drilling and manage shared state cleanly. Using multiple contexts made the app easier to reason about, and combining Bootstrap with custom CSS allowed me to focus on functionality first and styling second.

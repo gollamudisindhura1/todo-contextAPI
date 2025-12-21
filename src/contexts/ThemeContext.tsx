@@ -26,6 +26,10 @@ export function ThemeProvider({ children }:{children: React.ReactNode}) {
         localStorage.setItem("theme", theme)
     }, [theme])
 
+    useEffect(() => {
+  document.body.className = theme;
+}, [theme]);
+
     return (
         <ThemeContext.Provider value = {{theme, toggleTheme}}>
             {children}

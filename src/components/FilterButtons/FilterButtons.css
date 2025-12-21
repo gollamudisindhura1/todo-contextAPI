@@ -5,10 +5,12 @@
 }
 
 .filters button {
-  padding: 6px 12px;
+ border-radius: 20px;
+  padding: 6px 16px;
 }
 
 .filters .active {
-  background-color: #6c757d;
+ background-color: #6c63ff;
   color: white;
+  border-color: #6c63ff;
 }

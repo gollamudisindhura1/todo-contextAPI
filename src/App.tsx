@@ -4,7 +4,7 @@ import TodoList from "./components/TodoList/TodoList";
 import FilterButtons from "./components/FilterButtons/FilterButtons";
 import ThemeToggle from "./components/ThemeToggle/ThemeToggle";
 import { ThemeContext } from "./contexts/ThemeContext";
-import "./styles/app.css";
+import "./app.css";
 
 
 export default function App() {

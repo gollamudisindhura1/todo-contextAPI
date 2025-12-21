@@ -14,6 +14,7 @@ type TodoContextType = {
     toggleTodo: (id: number) => void
     deleteTodo: (id: number) => void
     clearCompleted: () => void
+    editTodo: (id: number, newText: string) => void
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -23,6 +24,7 @@ export const TodoContext = createContext<TodoContextType>({
     toggleTodo: () => {},
     deleteTodo: () => {},
     clearCompleted: () =>{},
+    editTodo: ()=>{}
 })
 
 export function TodoProvider({children}:{children: ReactNode}){
@@ -58,10 +60,20 @@ export function TodoProvider({children}:{children: ReactNode}){
     const clearCompleted = () =>{
         setTodos(prev => prev.filter(todo => !todo.completed))
     }
+    // Edit todo
+   const editTodo = (id: number, newText: string) => {
+    setTodos(prev =>
+      prev.map(todo =>
+        todo.id === id
+          ? { ...todo, text: newText }
+          : todo
+      )
+    );
+  };
 
     return (
         <TodoContext.Provider
-      value={{ todos, addTodo, toggleTodo, deleteTodo, clearCompleted }}
+      value={{ todos, addTodo, toggleTodo, deleteTodo, clearCompleted, editTodo }}
     >
       {children}
     </TodoContext.Provider>
